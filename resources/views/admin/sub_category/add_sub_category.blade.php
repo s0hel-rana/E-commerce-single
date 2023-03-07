@@ -1,4 +1,4 @@
 @extends('admin.layouts.template')
 @section('content')
-    hello admin dashboard
+    add sub_category
 @endsection
