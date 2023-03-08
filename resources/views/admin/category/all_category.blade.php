@@ -28,8 +28,8 @@ All Category
                     <td>{{ $category->subcategory_count }}</td>
                     <td>{{ $category->product_count }}</td>
                     <td>
-                        <a href="#" class="btn btn-sm btn-primary">Edit</a>
-                        <a href="#" class="btn btn-sm btn-danger">Delete</a>
+                        <a href="{{ route('edit_category',$category->id) }}" class="btn btn-sm btn-primary">Edit</a>
+                        <a href="{{route('delete_category',$category->id)}}" class="btn btn-sm btn-danger" onclick="return confirm('are you sure?')">Delete</a>
                     </td>
                   </tr>
                   @endforeach

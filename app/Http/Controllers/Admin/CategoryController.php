@@ -29,4 +29,27 @@ class CategoryController extends Controller
         toastr()->success('Category has been created successfully!');
         return redirect()->route('all_category');
     }
+    public function edit($id){
+        $category = Category::find($id);
+        return view('admin.category.edit',compact('category'));
+    }
+    public function update (Request $request,$id){
+
+        $validated = $request->validate([
+            'category_name' => 'required|max:255',
+        ]);
+
+        $category = Category::find($id);
+        $category->category_name = $request->category_name;
+        $category->slug = strtolower(str_replace(' ','-',$request->category_name));
+        $category->save();
+        toastr()->success('Category has been updated successfully!');
+        return redirect()->route('all_category');
+    }
+    public function delete($id){
+        $category = Category::find($id);
+        $category->delete();
+        toastr()->success('Category has been delete successfully!');
+        return redirect()->route('all_category');
+    }
 }
