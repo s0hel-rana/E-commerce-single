@@ -1,6 +1,6 @@
 @extends('admin.layouts.template')
 @section('page_content')
-Add Category
+Edit Category
 @endsection
 @section('content')
 <div class="container-xxl flex-grow-1 container-p-y">
