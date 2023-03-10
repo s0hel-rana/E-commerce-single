@@ -14,7 +14,8 @@ Add Product
               <small class="text-muted float-end">Input Information</small>
             </div>
             <div class="card-body">
-              <form>
+              <form action="{{ route('store_product') }}" method="post" enctype="multipart/form-data">
+                @csrf
                 <div class="row mb-3">
                   <label class="col-sm-2 col-form-label" for="basic-default-name">Product</label>
                   <div class="col-sm-10">
@@ -30,29 +31,32 @@ Add Product
                 </div>
 
                 <div class="row mb-3">
+                  <label class="col-sm-2 col-form-label" for="basic-default-name">Select Category</label>
+                  <div class="col-sm-10">
+                    <select class="form-select" id="category_id" name="category_id" aria-label="Default select example">
+                        <option selected>select category</option>
+                        @foreach($categories as $category)
+                          <option value="{{$category->id}}">{{$category->category_name}}</option>
+                        @endforeach
+                    </select>
+                  </div>
+                </div>
+
+                  <div class="row mb-3">
+                    <label class="col-sm-2 col-form-label" for="basic-default-name">Select Sub-Category</label>
+                    <div class="col-sm-10">
+                      <select class="form-select" id="subcategory_id" name="subcategory_id" aria-label="Default select example">
+                          <option selected>select sub category</option>
+                          @foreach($subcategories as $subcategory)
+                            <option value="{{$subcategory->id}}">{{$subcategory->subcategory_name}}</option>
+                          @endforeach
+                      </select>
+                    </div>
+                  </div>
+                  <div class="row mb-3">
                     <label class="col-sm-2 col-form-label" for="basic-default-name">Price</label>
                     <div class="col-sm-10">
-                      <input type="text" class="form-control" id="price" name="price" placeholder="Electronics" />
-                    </div>
-                  </div>
-
-                  <div class="row mb-3">
-                    <label class="col-sm-2 col-form-label" for="basic-default-name">Category</label>
-                    <div class="col-sm-10">
-                      <input type="text" class="form-control" id="category_name" name="category_name" placeholder="category" />
-                    </div>
-                  </div>
-
-                  <div class="row mb-3">
-                    <label class="col-sm-2 col-form-label" for="basic-default-name">Sub Categoy</label>
-                    <div class="col-sm-10">
-                      <input type="text" class="form-control" id="sub_category_name" name="sub_category_name" placeholder="sub category" />
-                    </div>
-                  </div>
-                  <div class="row mb-3">
-                    <label class="col-sm-2 col-form-label" for="basic-default-name">count</label>
-                    <div class="col-sm-10">
-                      <input type="text" class="form-control" id="count" name="count" placeholder="count" />
+                      <input type="number" class="form-control" id="price" name="price" placeholder="price" />
                     </div>
                   </div>
 
@@ -60,6 +64,12 @@ Add Product
                     <label class="col-sm-2 col-form-label" for="basic-default-name">Image</label>
                     <div class="col-sm-10">
                       <input type="file" class="form-control" id="image" name="image" placeholder="image" />
+                    </div>
+                  </div>
+                  <div class="row mb-3">
+                    <label class="col-sm-2 col-form-label" for="basic-default-name">Quantity</label>
+                    <div class="col-sm-10">
+                      <input type="text" class="form-control" id="qty" name="qty" placeholder="qty" />
                     </div>
                   </div>
                   <div class="row mb-3">

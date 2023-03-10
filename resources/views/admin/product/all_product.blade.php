@@ -14,31 +14,33 @@ All Products
                     <th>Id</th>
                     <th>Product Name</th>
                     <th>Description</th>
+                    <th>Category</th>
+                    <th>Sub-Category</th>
                     <th>price</th>
-                    <th>Category Name</th>
-                    <th>Sub Category Name</th>
-                    <th>Count</th>
                     <th>Image</th>
+                    <th>Quantity</th>
                     <th>Slug</th>
                     <th>Actions</th>
                   </tr>
                 </thead>
                 <tbody class="table-border-bottom-0">
+                  @foreach ($products as $key => $product )
                   <tr>
-                    <td>1</td>
-                    <td>s c</td>
-                    <td>s c</td>
-                    <td>p</td>
-                    <td>p</td>
-                    <td>p</td>
-                    <td>p</td>
-                    <td>p</td>
-                    <td>p</td>
+                    <td>{{ ++$key }}</td>
+                    <td>{{ $product->product_name }}</td>
+                    <td>{{ $product->description }}</td>
+                    <td>{{ $product->category_id  }}</td>
+                    <td>{{ $product->subcategory_id  }}</td>
+                    <td>{{ $product->price }}</td>
+                    <td>{{ $product->image }}</td>
+                    <td>{{ $product->qty }}</td>
+                    <td>{{ $product->slug }}</td>
                     <td>
                         <a href="#" class="btn btn-sm btn-primary">Edit</a>
                         <a href="#" class="btn btn-sm btn-danger">Delete</a>
                     </td>
                   </tr>
+                  @endforeach
                 </tbody>
               </table>
             </div>

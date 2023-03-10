@@ -17,7 +17,9 @@ return new class extends Migration
             $table->longText('description');
             $table->foreignId('category_id')->nullable()->constrained('categories')->onDelete('cascade');
             $table->foreignId('subcategory_id')->nullable()->constrained('sub_categories')->onDelete('cascade');
+            $table->string('price');
             $table->string('image')->nullable();
+            $table->string('qty');
             $table->string('slug');
             $table->timestamps();
         });
