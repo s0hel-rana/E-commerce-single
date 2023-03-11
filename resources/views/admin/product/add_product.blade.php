@@ -63,7 +63,7 @@ Add Product
                   <div class="row mb-3">
                     <label class="col-sm-2 col-form-label" for="basic-default-name">Image</label>
                     <div class="col-sm-10">
-                      <input type="file" class="form-control" id="image" name="image" placeholder="image" />
+                      <input type="file" accept="image/*" class="form-control" id="image" name="image" placeholder="image" />
                     </div>
                   </div>
                   <div class="row mb-3">

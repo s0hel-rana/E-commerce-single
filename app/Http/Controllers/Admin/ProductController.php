@@ -30,24 +30,25 @@ class ProductController extends Controller
             'qty' => 'required',
             'image' => 'required|image|mimes:jpeg,jpg,png,gif,svg|max:2048',
         ]);
-
-        $image = $request->file('image');
-        $img_name = hexdec(uniqid()).'.'.$image->getClientOriginalExtension();
-        $request->image->move(public_path('upload'),$img_name);
-        $img_url = 'upload/' . $img_name;
+        $filename = '';
+        if ($request->hasfile('image')) {
+            $file = $request->file('image');
+            $filename = date('Ymdmhs') . '.' . $file->getClientOriginalExtension();
+            $file->move(public_path('/upload'), $filename);
+        }
 
         $category_id = $request->category_id;
         $subcategory_id = $request->subcategory_id;
 
-        Product::insert([
-            'product_name' =>$request->product_name,
-            'description' =>$request->description,
-            'price' =>$request->price,
-            'category_id' =>$request->category_id,
-            'subcategory_id' =>$request->subcategory_id,
-            'image' =>$request->$img_url,
-            'qty' =>$request->qty,
-            'slug'=>strtolower(str_replace(' ','-',$request->product_name))
+        Product::create([
+            'product_name' => $request->product_name,
+            'description' => $request->description,
+            'price' => $request->price,
+            'category_id' => $request->category_id,
+            'subcategory_id' => $request->subcategory_id,
+            'image' => $filename,
+            'qty' => $request->qty,
+            'slug'=>strtolower(str_replace(' ','-',$request->product_name)),
         ]);
 
         Category::where('id',$category_id)->increment('product_count',1);
@@ -55,5 +56,51 @@ class ProductController extends Controller
 
         toastr()->success('Product has been created successfully!');
         return redirect()->route('all_product');
+    }
+    public function edit($id)
+    {   $categories = Category::find($id);
+        $subcategories = SubCategory::find($id);
+        $product = Product::find($id);
+        return view('admin.product.edit', compact('product','categories','subcategories'));
+    }
+    public function update(Request $request, $id)
+    {
+        $product = Product::find($id);
+        $filename = '';
+        if ($request->hasfile('image')) {
+            $file = $request->file('image');
+            $filename = date('Ymdmhs') . '.' . $file->getClientOriginalExtension();
+            $file->move(public_path('/upload'), $filename);
+        }
+        $product->update([
+            'product_name' => $request->product_name,
+            'description' => $request->description,
+            'price' => $request->price,
+            'category_id' => $request->category_id,
+            'subcategory_id' => $request->subcategory_id,
+            'image' => $filename,
+            'qty' => $request->qty,
+            'slug'=>strtolower(str_replace(' ','-',$request->product_name)),
+        ]);
+        toastr()->success('Product has been updated  successfully!');
+        return redirect()->route('all_product');
+    }
+    public function delete($id)
+    {
+        $product = Product::find($id);
+        $image = str_replace('\\', '/', public_path('/upload' . $product->image));
+        if (is_file($image)){
+            unlink($image);
+            $product->delete();
+            toastr()->success('Deleted  successfully!');
+            return redirect()->route('all_product');
+        }else {
+            $product->delete();
+            toastr()->success('Deleted  successfully!');
+            return redirect()->back();
+        }
+       
+        
+
     }
 }
