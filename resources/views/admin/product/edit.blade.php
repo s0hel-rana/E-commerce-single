@@ -32,13 +32,24 @@ Edit Product
                 <div class="row mb-3">
                   <label class="col-sm-2 col-form-label" for="basic-default-name">Category</label>
                   <div class="col-sm-10">
-                    <input type="text" class="form-control" id="category_id" name="category_id" value="{{ $product->category_id }}" />
+                    <select class="form-control" name="category_id">
+                      @foreach($categories as $category)
+                          <option @selected($category->id == $product->category_id)
+                              value="{{$category->id}}">{{$category->category_name}}</option>
+                      @endforeach
+                  </select>
+                    {{-- <input type="text" class="form-control" id="category_id" name="category_id" value="{{ $product->category_id }}" /> --}}
                   </div>
                 </div>
                 <div class="row mb-3">
                   <label class="col-sm-2 col-form-label" for="basic-default-name">Sub-Category</label>
                   <div class="col-sm-10">
-                    <input type="text" class="form-control" id="subcategory_id" name="subcategory_id" value="{{ $product->subcategory_id }}" />
+                    <select class="form-control" name="subcategory_id">
+                      @foreach($subcategories as $subcategory)
+                          <option @selected($subcategory->id == $product->subcategory_id)
+                              value="{{$subcategory->id}}">{{$subcategory->subcategory_name}}</option>
+                      @endforeach
+                  </select>
                   </div>
                 </div>
 
@@ -46,12 +57,6 @@ Edit Product
                     <label class="col-sm-2 col-form-label" for="basic-default-name">Price</label>
                     <div class="col-sm-10">
                       <input type="text" class="form-control" id="price" name="price" value="{{ $product->price }}" />
-                    </div>
-                </div>
-                <div class="row mb-3">
-                    <label class="col-sm-2 col-form-label" for="basic-default-name">Image</label>
-                    <div class="col-sm-10">
-                      <input type="text" class="form-control" id="image" name="image" value="{{ $product->image }}" />
                     </div>
                 </div>
                 <div class="row mb-3">

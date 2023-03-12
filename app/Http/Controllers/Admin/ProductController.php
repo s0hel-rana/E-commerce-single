@@ -58,27 +58,21 @@ class ProductController extends Controller
         return redirect()->route('all_product');
     }
     public function edit($id)
-    {   $categories = Category::find($id);
-        $subcategories = SubCategory::find($id);
+    {   $categories = Category::all();
+        $subcategories = SubCategory::all();
         $product = Product::find($id);
         return view('admin.product.edit', compact('product','categories','subcategories'));
     }
     public function update(Request $request, $id)
     {
         $product = Product::find($id);
-        $filename = '';
-        if ($request->hasfile('image')) {
-            $file = $request->file('image');
-            $filename = date('Ymdmhs') . '.' . $file->getClientOriginalExtension();
-            $file->move(public_path('/upload'), $filename);
-        }
+
         $product->update([
             'product_name' => $request->product_name,
             'description' => $request->description,
             'price' => $request->price,
             'category_id' => $request->category_id,
             'subcategory_id' => $request->subcategory_id,
-            'image' => $filename,
             'qty' => $request->qty,
             'slug'=>strtolower(str_replace(' ','-',$request->product_name)),
         ]);
@@ -88,7 +82,7 @@ class ProductController extends Controller
     public function delete($id)
     {
         $product = Product::find($id);
-        $image = str_replace('\\', '/', public_path('/upload' . $product->image));
+        $image = str_replace('\\', '/', public_path('/upload/' . $product->image));
         if (is_file($image)){
             unlink($image);
             $product->delete();

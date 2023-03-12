@@ -24,7 +24,7 @@ Edit Sub Category
                 </div>
 
                 <div class="row mb-3">
-                  <label class="col-sm-2 col-form-label" for="basic-default-name">Sub Category Name</label>
+                  <label class="col-sm-2 col-form-label" for="basic-default-name">Category Name</label>
                   <div class="col-sm-10">
                     <select class="form-control" name="category_id">
                         @foreach($categories as $category)

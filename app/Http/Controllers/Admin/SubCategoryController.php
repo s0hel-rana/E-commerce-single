@@ -30,12 +30,6 @@ class SubCategoryController extends Controller
             'category_id' =>$request->category_id
         ]);
 
-        // $subCategory = new SubCategory();
-        // $subCategory->subcategory_name = $request->subcategory_name;
-        // $subCategory->slug = strtolower(str_replace(' ','-',$request->subcategory_name));
-        // $subCategory->category_id = $request->category_id;
-        // $subCategory->save();
-
         Category::where('id',$category_id)->increment('subcategory_count',1);
 
         toastr()->success('Sub Category has been created successfully!');
@@ -47,15 +41,12 @@ class SubCategoryController extends Controller
         return view('admin.sub_category.edit',compact('subCategory','categories'));
     }
     public function update (Request $request,$id){
-
-        $validated = $request->validate([
-            'subcategory_name' => 'required|max:255',
-        ]);
-
         $subCategory = SubCategory::find($id);
-        $subCategory->subcategory_name = $request->subcategory_name;
-        $subCategory->slug = strtolower(str_replace(' ','-',$request->subcategory_name));
-        $subCategory->save();
+        $subCategory->update([
+            'subcategory_name' => $request->subcategory_name,
+            'category_id' => $request->category_id,
+            'slug'=>strtolower(str_replace(' ','-',$request->subcategory_name)),
+        ]);
         toastr()->success('Sub Category has been updated successfully!');
         return redirect()->route('all_sub_category');
     }
