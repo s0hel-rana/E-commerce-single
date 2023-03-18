@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\SubCategoryController;
+use App\Http\Controllers\ClientController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
@@ -12,6 +13,14 @@ use Illuminate\Support\Facades\Route;
 
 Route::controller(HomeController::class)->group(function () {
     Route::get('/', 'index');
+
+});
+Route::controller(ClientController::class)->group(function () {
+    Route::get('/category-page', 'categoryPage')->name('category_page');
+    Route::get('/single-product', 'singleProduct')->name('single_product');
+    Route::get('/add-to-cart', 'addToCart')->name('add_to_cart');
+    Route::get('/check-out', 'checkOut')->name('check_out');
+    Route::get('/user-profile', 'userProfile')->name('user_profile');
 
 });
 

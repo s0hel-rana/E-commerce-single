@@ -9,7 +9,7 @@
       <meta name="viewport" content="width=device-width, initial-scale=1">
       <meta name="viewport" content="initial-scale=1, maximum-scale=1">
       <!-- site metas -->
-      <title>Eflyer</title>
+      <title>Sflyer</title>
       <meta name="keywords" content="">
       <meta name="description" content="">
       <meta name="author" content="">
@@ -80,7 +80,9 @@
                      <a href="electronic.html">Electronic</a>
                      <a href="jewellery.html">Jewellery</a>
                   </div>
-                  <span class="toggle_icon" onclick="openNav()"><img src="{{ asset('home/images/toggle-icon.png') }}"></span>
+                  <span class="toggle_icon" onclick="openNav()">
+                     <img src="{{ asset('home/images/toggle-icon.png') }}">
+                  </span>
                   <div class="dropdown">
                      <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">All Category 
                      </button>
