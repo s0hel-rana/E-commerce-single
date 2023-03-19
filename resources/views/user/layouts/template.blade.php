@@ -47,10 +47,10 @@
                      <div class="custom_menu">
                         <ul>
                            <li><a href="#">Best Sellers</a></li>
-                           <li><a href="#">Gift Ideas</a></li>
-                           <li><a href="#">New Releases</a></li>
-                           <li><a href="#">Today's Deals</a></li>
-                           <li><a href="#">Customer Service</a></li>
+                           <li><a href="{{ route('gift_idea') }}">Gift Ideas</a></li>
+                           <li><a href="{{ route('new_release') }}">New Releases</a></li>
+                           <li><a href="{{ route('today_deals') }}">Today's Deals</a></li>
+                           <li><a href="{{ route('customer_service') }}">Customer Service</a></li>
                         </ul>
                      </div>
                   </div>

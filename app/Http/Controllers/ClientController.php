@@ -17,5 +17,21 @@ class ClientController extends Controller
     public function userProfile(){
         return view('user.profile.user_profile');
     }
+    // gift idea
+    public function giftIdea(){
+        return view('user.giftIdea.giftidea');
+    }
+    //new release
+    public function newRelease(){
+        return view('user.newRelease.newrelease');
+    }
+    //today deals
+    public function todayDeals(){
+        return view('user.todayDeals.todaydeals');
+    }
+    //customer service
+    public function customerService(){
+        return view('user.customerService.customerservice');
+    }
 
 }

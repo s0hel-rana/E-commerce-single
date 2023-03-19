@@ -21,6 +21,10 @@ Route::controller(ClientController::class)->group(function () {
     Route::get('/add-to-cart', 'addToCart')->name('add_to_cart');
     Route::get('/check-out', 'checkOut')->name('check_out');
     Route::get('/user-profile', 'userProfile')->name('user_profile');
+    Route::get('/gift-idea','giftIdea')->name('gift_idea');
+    Route::get('/new-release','newRelease')->name('new_release');
+    Route::get('/today-deals','todayDeals')->name('today_deals');
+    Route::get('/customer-service','customerService')->name('customer_service');
 
 });
 
