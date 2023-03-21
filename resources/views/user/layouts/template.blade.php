@@ -1,5 +1,6 @@
 @php
    $categories = App\Models\Admin\Category::latest()->get();
+   $subcategories = App\Models\Admin\SubCategory::latest()->get();
 @endphp
 <!DOCTYPE html>
 <html lang="en">
@@ -96,6 +97,15 @@
                         @endforeach
                      </div>
                   </div>
+                  <div class="dropdown">
+                     <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">All Sub-Category 
+                     </button>
+                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        @foreach ($subcategories as $subcategory )
+                           <a class="dropdown-item" href="{{ route('sub_category',[$subcategory->id,$subcategory->slug]) }}">{{ $subcategory->subcategory_name }}</a>
+                        @endforeach
+                     </div>
+                  </div>
                   <div class="main">
                      <!-- Another variation with a button -->
                      <div class="input-group">
@@ -152,21 +162,21 @@
             </div>
             <div class="footer_menu">
                <ul>
-                  <li><a href="#">Best Sellers</a></li>
-                  <li><a href="#">Gift Ideas</a></li>
-                  <li><a href="#">New Releases</a></li>
-                  <li><a href="#">Today's Deals</a></li>
-                  <li><a href="#">Customer Service</a></li>
+                  <li><a href="{{ route('home_page') }}">Home</a></li>
+                  <li><a href="{{ route('gift_idea') }}">Gift Ideas</a></li>
+                  <li><a href="{{ route('new_release') }}">New Releases</a></li>
+                  <li><a href="{{ route('today_deals') }}">Today's Deals</a></li>
+                  <li><a href="{{ route('customer_service') }}">Customer Service</a></li>
                </ul>
             </div>
-            <div class="location_main">Help Line  Number : <a href="#">+1 1800 1200 1200</a></div>
+            <div class="location_main">Help Line  Number : <a href="#">+8801713616087</a></div>
          </div>
       </div>
       <!-- footer section end -->
       <!-- copyright section start -->
       <div class="copyright_section">
          <div class="container">
-            <p class="copyright_text">© 2020 All Rights Reserved. Design by <a href="https://html.design">Free html  Templates</a></p>
+            <p class="copyright_text">© 2022 All Rights Reserved. Design by <a href="#">Sohel Rana</a></p>
          </div>
       </div>
       <!-- copyright section end -->

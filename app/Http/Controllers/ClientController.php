@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Admin\Category;
 use App\Models\Admin\Product;
+use App\Models\Admin\SubCategory;
 use Illuminate\Http\Request;
 
 class ClientController extends Controller
@@ -12,6 +13,11 @@ class ClientController extends Controller
         $category = Category::findOrFail($id);
         $products = Product::where('category_id',$id)->latest()->get();
         return view('user.category.category_page',compact('category','products'));
+    }
+    public function subCategory($id){
+        $subcategory = SubCategory::findOrFail($id);
+        $products = Product::where('subcategory_id',$id)->latest()->get();
+        return view('user.subcategory.subcategory',compact('subcategory','products'));
     }
     //product
     public function singleProduct(){
