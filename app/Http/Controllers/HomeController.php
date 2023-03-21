@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Admin\Product;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
     public function index(){
-        return view('user.home');
+        $allProducts = Product::latest()->get();
+        return view('user.home',compact('allProducts'));
     }
 }

@@ -12,11 +12,11 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::controller(HomeController::class)->group(function () {
-    Route::get('/', 'index');
+    Route::get('/', 'index')->name('home_page');
 
 });
 Route::controller(ClientController::class)->group(function () {
-    Route::get('/category-page', 'categoryPage')->name('category_page');
+    Route::get('/category/{id}/{slug}', 'categoryPage')->name('category_page');
     Route::get('/single-product', 'singleProduct')->name('single_product');
     Route::get('/add-to-cart', 'addToCart')->name('add_to_cart');
     Route::get('/check-out', 'checkOut')->name('check_out');

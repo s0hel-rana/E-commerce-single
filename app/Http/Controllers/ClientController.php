@@ -2,12 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Admin\Category;
+use App\Models\Admin\Product;
 use Illuminate\Http\Request;
 
 class ClientController extends Controller
 {
-    public function categoryPage(){
-        return view('user.category.category_page');
+    public function categoryPage($id){
+        $category = Category::findOrFail($id);
+        $products = Product::where('category_id',$id)->latest()->get();
+        return view('user.category.category_page',compact('category','products'));
     }
     //product
     public function singleProduct(){

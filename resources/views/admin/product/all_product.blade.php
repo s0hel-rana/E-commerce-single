@@ -31,7 +31,7 @@ All Products
                     <td>{{ $product->description }}</td>
                     <td>{{ $product->category->category_name  }}</td>
                     <td>{{ $product->subcategory->subcategory_name  }}</td>
-                    <td>{{ $product->price }}</td>
+                    <td>${{ number_format($product->price, 2) }}</td>
                     <td><img src="{{ asset('/upload/'.$product->image) }}" alt="" style="height:80px;width:120px;"></td>
                     <td>{{ $product->qty }}</td>
                     <td>{{ $product->slug }}</td>
