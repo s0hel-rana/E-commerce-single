@@ -20,8 +20,11 @@ class ClientController extends Controller
         return view('user.subcategory.subcategory',compact('subcategory','products'));
     }
     //product
-    public function singleProduct(){
-        return view('user.product.index');
+    public function productDetails($id){
+        $product = Product::findOrFail($id);
+        $category_id = Product::where('id',$id)->value('category_id');
+        $related_products = Product::where('category_id',$category_id)->latest()->get();
+        return view('user.product.index',compact('product','related_products'));
     }
     //user profile
     public function userProfile(){
