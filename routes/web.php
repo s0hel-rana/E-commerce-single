@@ -20,25 +20,33 @@ Route::controller(ClientController::class)->group(function () {
     Route::get('/subcategory/{id}/{slug}', 'subCategory')->name('sub_category');
     Route::get('/product-details/{id}/{slug}', 'productDetails')->name('product_details');
     Route::get('/add-to-cart', 'addToCart')->name('add_to_cart');
-
+    Route::get('/check-out', 'checkOut')->name('check_out');
+    
 });
 
+
+
+Route::get('/dashboard', function () {
+    return view('dashboard');
+
+})->middleware(['auth', 'role:user','verified'])->name('dashboard');
+
+//user panel
 Route::middleware(['auth', 'role:user'])->group(function () {
     Route::controller(ClientController::class)->group(function () {
-        Route::get('/check-out', 'checkOut')->name('check_out');
         Route::get('/user-profile', 'userProfile')->name('user_profile');
+        Route::get('/pending-order', 'pendingOrder')->name('user_pending_order');    
+        Route::get('/user-history', 'userHistory')->name('user_history');
         Route::get('/gift-idea','giftIdea')->name('gift_idea');
         Route::get('/new-release','newRelease')->name('new_release');
         Route::get('/today-deals','todayDeals')->name('today_deals');
         Route::get('/customer-service','customerService')->name('customer_service');
-
+       
     });
+
 });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'role:user','verified'])->name('dashboard');
-
+//admin panel
 Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::controller(DashboardController::class)->group(function () {
         Route::get('/admin_dashboard', 'index')->name('admin_dashboard');
