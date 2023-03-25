@@ -54,7 +54,7 @@
                 <li class="nav-item dropdown no-arrow">
                     <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{ Auth::user()->name }}</span>
+                        <span class="mr-2 d-none d-lg-inline text-gray-600 small">sohel</span>
                         <img style="width: 32px; height:32px;" class="img-profile rounded-circle"
                             src="{{ asset('upload/20230321030205.png') }}">
                     </a>

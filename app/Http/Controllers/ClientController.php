@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Admin\Category;
 use App\Models\Admin\Product;
 use App\Models\Admin\SubCategory;
+use App\Models\Cart;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ClientController extends Controller
 {
@@ -25,6 +27,24 @@ class ClientController extends Controller
         $category_id = Product::where('id',$id)->value('category_id');
         $related_products = Product::where('category_id',$category_id)->latest()->get();
         return view('user.product.index',compact('product','related_products'));
+    }
+    public function addToCart(){
+        return view('user.add_to_cart.addtocart');
+    }
+    //add to cart
+    public function addToProductCart(Request $request){
+        $product_price = $request->price;
+        $cart_qty = $request->qty;
+        $price = $product_price * $cart_qty;
+
+        $product_cart = new Cart();
+        $product_cart->product_id = $request->product_id;
+        $product_cart->user_id = Auth::id();
+        $product_cart->qty = $request->qty;
+        $product_cart->price = $price;
+        $product_cart->save();
+        toastr()->success('Your items added to cart successfully!');
+        return redirect()->route('add_to_cart');
     }
     //user profile
     public function userProfile(){
