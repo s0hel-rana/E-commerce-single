@@ -1,6 +1,7 @@
 @php
    $categories = App\Models\Admin\Category::latest()->get();
    $subcategories = App\Models\Admin\SubCategory::latest()->get();
+   $cart = App\Models\Cart::latest()->get();
 @endphp
 <!DOCTYPE html>
 <html lang="en">
@@ -54,7 +55,7 @@
                 <li class="nav-item dropdown no-arrow">
                     <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <span class="mr-2 d-none d-lg-inline text-gray-600 small">sohel</span>
+                        <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{ Auth::user()->name }}</span>
                         <img style="width: 32px; height:32px;" class="img-profile rounded-circle"
                             src="{{ asset('upload/20230321030205.png') }}">
                     </a>
@@ -159,7 +160,7 @@
                            </li>
                            <li><a href="#">
                               <i class="fa fa-user" aria-hidden="true"></i>
-                              <span class="padding_10">Cart</span></a>
+                              <span class="padding_10">{{ Auth::user()->name }}</span></a>
                            </li>
                         </ul>
                      </div>

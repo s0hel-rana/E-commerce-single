@@ -6,6 +6,7 @@ use App\Models\Admin\Category;
 use App\Models\Admin\Product;
 use App\Models\Admin\SubCategory;
 use App\Models\Cart;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -29,7 +30,9 @@ class ClientController extends Controller
         return view('user.product.index',compact('product','related_products'));
     }
     public function addToCart(){
-        return view('user.add_to_cart.addtocart');
+        $product = Product::all();
+        $carts = Cart::latest()->get();
+        return view('user.add_to_cart.addtocart',compact('product','carts'));
     }
     //add to cart
     public function addToProductCart(Request $request){
