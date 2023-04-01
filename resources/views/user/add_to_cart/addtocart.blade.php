@@ -30,21 +30,25 @@
                                     <td>{{$cart->qty}} </td>
                                     <td>{{$cart->price}} </td>
                                     <td>
-                                        <a class="btn btn-danger" href="#" onclick="return confirm('are you sure !!!')" style="font-size:13px"><i class="fa fa-times" aria-hidden="true"></i></a>
+                                        <a class="btn btn-danger" href="{{ route('cart_remove',$cart->id) }}" onclick="return confirm('are you sure !!!')" style="font-size:13px"><i class="fa fa-times" aria-hidden="true"></i></a>
                                     </td>
                                 </tr>
                                 @php
                                     $total += $cart->price;
                                 @endphp
                         @endforeach
+                        @if ($total > 0)
                         <tr>
                             <td><b>Total</b></td>
                             <td></td>
                             <td></td>
                             <td></td>
                             <td><b>{{ $total }}</b></td>
-                            <td></td>
+                            <td>
+                                <a href="{{ route('shipping_address') }}" class="btn btn-sm btn-outline-primary">Checkout now</a>
+                            </td>
                         </tr>
+                        @endif
 
                         </tbody>
         

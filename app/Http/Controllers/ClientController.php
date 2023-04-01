@@ -6,6 +6,7 @@ use App\Models\Admin\Category;
 use App\Models\Admin\Product;
 use App\Models\Admin\SubCategory;
 use App\Models\Cart;
+use App\Models\ShippingInfo;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -34,6 +35,7 @@ class ClientController extends Controller
         $carts = Cart::latest()->get();
         return view('user.add_to_cart.addtocart',compact('product','carts'));
     }
+    
     //add to cart
     public function addToProductCart(Request $request){
         $product_price = $request->price;
@@ -48,6 +50,39 @@ class ClientController extends Controller
         $product_cart->save();
         toastr()->success('Your items added to cart successfully!');
         return redirect()->route('add_to_cart');
+    }
+    //remove add to cart
+    public function remove($id){
+        Cart::findOrFail($id)->delete();
+        toastr()->success('Items is removed successfully!');
+        return redirect()->route('add_to_cart');
+    }
+    public function getShippingAddress(){
+        return view('user.shipping.shippingadd');
+    }
+    public function addShippingAddress(Request $request){
+        $validated = $request->validate([
+            'phone' => 'required',
+            'village' => 'required',
+            'city' => 'required',
+            'code' => 'required',
+        ]);
+        ShippingInfo::create([
+            'user_id' => Auth::id(),
+            'phone' => $request->phone,
+            'village' => $request->village,
+            'city' => $request->city,
+            'code' => $request->code
+            
+        ]);
+        toastr()->success('shipping has been successfully!');
+        return redirect()->route('check_out');
+    }
+    public function checkOut(){
+        $userId = Auth::id();
+        $cartItems = Cart::where('user_id',$userId)->get();
+        $shipping = ShippingInfo::where('user_id',$userId)->first();
+        return view('user.checkout.checkout',compact('cartItems','shipping'));
     }
     //user profile
     public function userProfile(){

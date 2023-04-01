@@ -38,6 +38,10 @@ Route::middleware(['auth', 'role:user'])->group(function () {
         Route::get('/user-history', 'userHistory')->name('user_history');
         Route::get('/add-to-cart', 'addToCart')->name('add_to_cart');
         Route::post('/add-to-product-cart', 'addToProductCart')->name('add_to_product_cart');
+        Route::get('/remove/{id}', 'remove')->name('cart_remove');
+        Route::get('/shipping-address', 'getShippingAddress')->name('shipping_address');
+        Route::post('/add-shipping-address', 'addShippingAddress')->name('add_shipping_address');
+        Route::get('/check-out', 'checkOut')->name('check_out');
         Route::get('/gift-idea','giftIdea')->name('gift_idea');
         Route::get('/new-release','newRelease')->name('new_release');
         Route::get('/today-deals','todayDeals')->name('today_deals');

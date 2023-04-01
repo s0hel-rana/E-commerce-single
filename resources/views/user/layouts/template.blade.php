@@ -1,7 +1,7 @@
 @php
    $categories = App\Models\Admin\Category::latest()->get();
    $subcategories = App\Models\Admin\SubCategory::latest()->get();
-   $cart = App\Models\Cart::latest()->get();
+   $carts = App\Models\Cart::all();
 @endphp
 <!DOCTYPE html>
 <html lang="en">
@@ -156,7 +156,7 @@
                         <ul>
                            <li><a href="#">
                               <i class="fa fa-shopping-cart" aria-hidden="true"></i>
-                              <span class="padding_10">Cart</span></a>
+                              <span class="padding_10">{{ $carts->count('qty') }}</span></a>
                            </li>
                            <li><a href="#">
                               <i class="fa fa-user" aria-hidden="true"></i>
