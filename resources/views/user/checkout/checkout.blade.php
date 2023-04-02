@@ -56,5 +56,12 @@
             </div>
         </div>
     </div>
+    <form action="{{ route('place_order') }}" method="post">
+        @csrf
+        <input type="submit" value="Place Order" class="btn btn-sm btn-success mr-3">
+    </form>
+    <form action="" method="post">
+        <input type="submit" value="Cancel Order" class="btn btn-sm btn-danger">
+    </form>
 </div>
 @endsection

@@ -41,6 +41,7 @@ Route::middleware(['auth', 'role:user'])->group(function () {
         Route::get('/remove/{id}', 'remove')->name('cart_remove');
         Route::get('/shipping-address', 'getShippingAddress')->name('shipping_address');
         Route::post('/add-shipping-address', 'addShippingAddress')->name('add_shipping_address');
+        Route::post('/place-order', 'placeOrder')->name('place_order');
         Route::get('/check-out', 'checkOut')->name('check_out');
         Route::get('/gift-idea','giftIdea')->name('gift_idea');
         Route::get('/new-release','newRelease')->name('new_release');

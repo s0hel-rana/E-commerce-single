@@ -6,6 +6,7 @@ use App\Models\Admin\Category;
 use App\Models\Admin\Product;
 use App\Models\Admin\SubCategory;
 use App\Models\Cart;
+use App\Models\Order;
 use App\Models\ShippingInfo;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -84,13 +85,40 @@ class ClientController extends Controller
         $shipping = ShippingInfo::where('user_id',$userId)->first();
         return view('user.checkout.checkout',compact('cartItems','shipping'));
     }
+
+    //order 
+    public function placeOrder(){
+        $userId = Auth::id();
+        $shipping = ShippingInfo::where('user_id',$userId)->first();
+        $cartItems = Cart::where('user_id',$userId)->get();
+
+        foreach($cartItems as $item){
+            Order::create([
+                'userId' => $userId,
+                'phone' => $shipping->phone,
+                'village' => $shipping->village,
+                'city' => $shipping->city,
+                'code' => $shipping->code,
+                'product_name' => $item->product->product_name,
+                'qty' => $item->qty,
+                'price' => $item->price
+            ]);
+            $id = $item->id;
+            Cart::findOrFail($id)->delete();
+        }
+        ShippingInfo::where('user_id',$userId)->first()->delete();
+
+        toastr()->success('Your order has been placed successfully!');
+        return redirect()->route('user_pending_order');
+    }
     //user profile
     public function userProfile(){
         return view('user.profile.user_profile');
     }
     //user pending order
     public function pendingOrder(){
-        return view('user.profile.user_pending_order');
+        $pendingOrders = Order::where('status','pending')->latest()->get();
+        return view('user.profile.user_pending_order',compact('pendingOrders'));
     }
     //user history
     public function userHistory(){
