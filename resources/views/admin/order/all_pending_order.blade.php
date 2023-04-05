@@ -12,29 +12,38 @@ All Orders
                 <thead class="table-light">
                   <tr>
                     <th>Id</th>
+                    <th>User Id</th>
+                    <th>Phone</th>
+                    <th>VIllage</th>
+                    <th>City</th>
+                    <th>Code</th>
                     <th>Product Name</th>
-                    <th>price</th>
-                    <th>Quantity</th>
-                    <th>Total price</th>
-                    <th>Order Status</th>
-                    <th>Order Submission date</th>
+                    <th>Qty</th>
+                    <th>Price</th>
                     <th>Actions</th>
                   </tr>
                 </thead>
                 <tbody class="table-border-bottom-0">
+                  @php
+                    $i = 1;
+                  @endphp
+                  @foreach ($pendingOrders as $pendingOrder)
                   <tr>
-                    <td>1</td>
-                    <td>s c</td>
-                    <td>p</td>
-                    <td>p</td>
-                    <td>p</td>
-                    <td>p</td>
-                    <td>p</td>
+                    <td>{{ $i++ }}</td>
+                    <td>{{ $pendingOrder->userId }}</td>
+                    <td>{{ $pendingOrder->phone }}</td>
+                    <td>{{ $pendingOrder->village }}</td>
+                    <td>{{ $pendingOrder->city }}</td>
+                    <td>{{ $pendingOrder->code }}</td>
+                    <td>{{ $pendingOrder->product_name }}</td>
+                    <td>{{ $pendingOrder->qty }}</td>
+                    <td>{{ $pendingOrder->price }}</td>
                     <td>
-                        <a href="#" class="btn btn-sm btn-primary">Edit</a>
-                        <a href="#" class="btn btn-sm btn-danger">Delete</a>
+                        <a href="#" class="btn btn-sm btn-success">Approve now</a>
                     </td>
                   </tr>
+                  @endforeach
+                  
                 </tbody>
               </table>
             </div>
